@@ -1,3 +1,4 @@
+import Enteries from "../enteries/Enteries";
 import Upload from "../upload/Upload";
 
 const Container = () => {
@@ -6,7 +7,9 @@ const Container = () => {
       <div className="upload">
         <Upload />
       </div>
-      <div style={{ width: "50%" }}></div>
+      <div style={{ width: "50%" }}>
+        <Enteries/>
+      </div>
     </div>
   );
 };

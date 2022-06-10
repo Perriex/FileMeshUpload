@@ -20,7 +20,7 @@
   width: 50%;
 }
 
-form {
+.Upload {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,14 +29,17 @@ form {
   display: grid;
   place-items: center;
 }
-form p {
+.Upload p {
+  cursor: pointer;
+
   width: 100%;
   height: min-content;
   text-align: center;
   color: rgb(25, 25, 25);
   font-family: Arial;
 }
-form input {
+.Upload input {
+  cursor: pointer;
   position: absolute;
   margin: 0;
   padding: 0;
@@ -45,7 +48,7 @@ form input {
   outline: none;
   opacity: 0;
 }
-form button {
+.Upload button {
   margin: 0;
   color: #fff;
   background: dodgerblue;
@@ -58,10 +61,91 @@ form button {
   transition: all 0.2s ease;
   outline: none;
 }
-form button:hover {
+.Upload button:hover {
   background: dodgerblue;
   color: rgb(31, 128, 226);
 }
-form button:active {
+.Upload button:active {
   border: 0;
+}
+
+.Enteries {
+  border: 1px solid dodgerblue;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
+  min-width: 300px;
+  border-radius: 1em;
+}
+
+.Enteries caption {
+  font-size: 1.1em;
+  margin: 0.5em 0 0.5em;
+}
+
+.Enteries tr {
+  background-color: #fff7f7;
+  border: 1px solid transparent;
+  padding: 0.35em;
+}
+
+.Enteries th,
+.Enteries td {
+  padding: 0.625em;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.Enteries th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: dodgerblue;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .Enteries {
+    border: 0;
+  }
+
+  .Enteries caption {
+    font-size: 1.3em;
+  }
+
+  .Enteries thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .Enteries tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  .Enteries td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  .Enteries td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .Enteries td:last-child {
+    border-bottom: 0;
+  }
 }
