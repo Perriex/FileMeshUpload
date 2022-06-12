@@ -25,7 +25,7 @@ export const sendRequest = async (url, body) => {
     }
   }
   const error = await res.json();
-  throw error;
+  alert(error);
 };
 
 export const uploadFile = async (file) => {
@@ -35,7 +35,6 @@ export const uploadFile = async (file) => {
     method: "POST",
     body: form,
   };
-  console.log("🚀 ~ file: engine.js ~ line 39 ~ uploadFile ~ init", init);
   const res = await fetch(Local + "Upload", init);
   try {
     const json = await res.json();

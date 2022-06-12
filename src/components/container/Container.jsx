@@ -9,11 +9,25 @@ const Container = () => {
   const [root, setRoot] = React.useState();
   const [list, setList] = React.useState([]);
   const [search, setSearch] = React.useState();
-
   useEffect(() => {
     FileMesh.Root().then(setRoot);
     FileMesh.List().then(setList);
   }, []);
+
+  const setDownloadSpeed = () => {
+    setInterval(function () {
+      FileMesh.List().then(setList);
+      console.log("downloading");
+    }, 1000);
+  };
+
+  const clearSearch = () => setSearch();
+
+  const clearDownloadSpeed = () => {
+    var killId = setTimeout(function () {
+      for (var i = killId; i > 0; i--) clearInterval(i);
+    }, 3000);
+  };
 
   return (
     <>
@@ -24,12 +38,18 @@ const Container = () => {
           </div>
           <div className="Container-row">
             <div className="upload">
-              <Upload />
+              <Upload setDownloadSpeed={setDownloadSpeed} />
             </div>
             <div style={{ width: "50%" }}>
               <p>User IP : {root.address}</p>
               <p>Depth : {root.depth}</p>
-              <Enteries search={search} list={list} />
+              <Enteries
+                search={search}
+                list={list}
+                clearDownloadSpeed={clearDownloadSpeed}
+                setDownloadSpeed={setDownloadSpeed}
+                clearSearch={clearSearch}
+              />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@
 
 .Container {
   background-color: #fff;
-  min-width: 50vw;
+  min-width: 70vw;
   min-height: 50vh;
   border-radius: 16px;
   display: flex;
@@ -91,7 +91,7 @@
   margin: 0;
   padding: 0;
   table-layout: fixed;
-  min-width: 100%;
+  min-width: 80%;
   border-radius: 1em;
 }
 
@@ -118,6 +118,11 @@
   text-transform: uppercase;
   background-color: #f7f7fe;
   color: rgb(95, 95, 95);
+}
+
+.Enteries  {
+  max-height: 60vh;
+  overflow: auto;
 }
 
 .Enteries td {

@@ -1,7 +1,7 @@
 import React from "react";
 import FileMesh from "../../service/FileMesh";
 
-const Upload = () => {
+const Upload = ({ setDownloadSpeed }) => {
   const [drag, setDrag] = React.useState(false);
   const inputRef = React.useRef(null);
 
@@ -33,7 +33,7 @@ const Upload = () => {
   };
 
   const handleFiles = (file) => {
-    FileMesh.Add(file).then(console.log);
+    FileMesh.Add(file).then(setDownloadSpeed);
   };
 
   const onButtonClick = () => {
