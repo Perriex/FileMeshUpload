@@ -1,4 +1,5 @@
 import React from "react";
+import FileMesh from "../../service/FileMesh";
 
 const Upload = () => {
   const [drag, setDrag] = React.useState(false);
@@ -8,26 +9,31 @@ const Upload = () => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
+      setDrag(true);
     } else if (e.type === "dragleave") {
-      setDragActive(false);
+      setDrag(false);
     }
   };
 
   const handleDrop = function (e) {
     e.preventDefault();
     e.stopPropagation();
-    setDragActive(false);
+
+    setDrag(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // handleFiles(e.dataTransfer.files);
+      handleFiles(e.dataTransfer.files[0]);
     }
   };
 
   const handleChange = function (e) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      // handleFiles(e.target.files);
+      handleFiles(e.target.files[0]);
     }
+  };
+
+  const handleFiles = (file) => {
+    FileMesh.Add(file).then(console.log);
   };
 
   const onButtonClick = () => {
@@ -35,7 +41,11 @@ const Upload = () => {
   };
 
   return (
-    <form className="Upload" onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
+    <form
+      className="Upload"
+      onDragEnter={handleDrag}
+      onSubmit={(e) => e.preventDefault()}
+    >
       <input
         ref={inputRef}
         type="file"
