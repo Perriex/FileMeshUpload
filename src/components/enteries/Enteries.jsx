@@ -8,18 +8,19 @@ const Enteries = ({
   clearDownloadSpeed,
   setDownloadSpeed,
   clearSearch,
+  chunkSize,
 }) => {
   const download = (item) => {
     clearSearch();
-    FileMesh.Download(item).then(() => {
+    FileMesh.Download(item, chunkSize).then(() => {
       alert("File is downloading!");
       setDownloadSpeed();
     });
   };
 
   useEffect(() => {
-    if (list) {
-      let data = list.filter((item) => item.progress !== 1);
+    if (list.length > 0) {
+      let data = list.filter((item) => item.progress === 1);
       if (data.length === list.length) {
         clearDownloadSpeed();
       }
@@ -27,58 +28,68 @@ const Enteries = ({
   }, [list]);
 
   return (
-    <table className="Enteries">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Size</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {search ? (
-          search.length > 0 ? (
-            search.map((item) => (
-              <tr key={item.id}>
-                <td data-label="Name">{item.name}</td>
-                <td data-label="Size">{item.size}</td>
-                <td data-label="">
-                  <button onClick={() => download(item)}>Download</button>
-                </td>
-              </tr>
+    <>
+      <table className="Enteries">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {search ? (
+            search.length > 0 ? (
+              search.map((item) => (
+                <tr key={item.id}>
+                  <td data-label="Name">{item.name}</td>
+                  <td data-label="Size">{item.size}</td>
+                  <td data-label="">
+                    <button onClick={() => download(item)}>Download</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <p style={{ padding: "1em", color: "red" }}> Not found!</p>
+            )
+          ) : list.length > 0 ? (
+            list.map((item) => (
+              <>
+                <tr key={item.id}>
+                  <td data-label="Name">{item.name || "None"}</td>
+                  <td data-label="Size">{Math.ceil(item.size / 1000)} kb</td>
+                  <td data-label="">
+                    {item.name !== null ? (
+                      <button disabled>
+                        {item.downloadSpeed !== 0
+                          ? item.downloadSpeed
+                          : "Downloaded"}
+                      </button>
+                    ) : (
+                      <button disabled style={{ backgroundColor: "Red" }}>
+                        {item.downloadSpeed !== 0
+                          ? item.downloadSpeed
+                          : "Failed"}
+                      </button>
+                    )}
+                  </td>
+                </tr>
+                {item.progress !== 1 && (
+                  <div class="progress">
+                    <span
+                      class="progress-bar"
+                      style={{ width: item.progress * 100 + "%" }}
+                    ></span>
+                  </div>
+                )}
+              </>
             ))
           ) : (
-            <p style={{ padding: "1em", color: "red" }}> Not found!</p>
-          )
-        ) : list.length > 0 ? (
-          list.map((item) => (
-            <>
-              <tr key={item.id}>
-                <td data-label="Name">{item.name}</td>
-                <td data-label="Size">{Math.ceil(item.size / 1000)} kb</td>
-                <td data-label="">
-                  <button disabled>
-                    {item.downloadSpeed !== 0
-                      ? item.downloadSpeed
-                      : "Downloaded"}
-                  </button>
-                </td>
-              </tr>
-              {item.progress !== 1 && (
-                <div class="progress">
-                  <span
-                    class="progress-bar"
-                    style={{ width: item.progress * 100 + "%" }}
-                  ></span>
-                </div>
-              )}
-            </>
-          ))
-        ) : (
-          <p style={{ padding: "1em", color: "red" }}> Upload a File!</p>
-        )}{" "}
-      </tbody>
-    </table>
+            <p style={{ padding: "1em", color: "red" }}> Upload a File!</p>
+          )}{" "}
+        </tbody>
+      </table>
+    </>
   );
 };
 
