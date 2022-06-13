@@ -1,14 +1,14 @@
 {
-  "name": "ds",
+  "name": "file-mesh-upload",
   "private": true,
-  "version": "0.0.0",
-  "homepage": "https://Perriex.github.io/FileMeshUpload/",
+  "version": "1.0.5",
+  "homepage": "https://perriex.github.io/FileMeshUpload/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.0.0",
