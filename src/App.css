@@ -4,11 +4,12 @@
   justify-content: center;
   min-height: 100vh;
   min-width: 100%;
+  position: relative;
 }
 
 .Container {
   background-color: #fff;
-  min-width: 50vw;
+  min-width: 60vw;
   min-height: 50vh;
   border-radius: 16px;
   display: flex;
@@ -120,7 +121,6 @@
   font-size: 0.85em;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  background-color: #f7f7fe;
   color: rgb(95, 95, 95);
 }
 
