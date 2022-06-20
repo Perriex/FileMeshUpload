@@ -5,7 +5,7 @@ const FileMesh = {
   Insert: async (body) => await sendRequest("Insert", body),
   Search: async (term) => await sendRequest("Search?term=" + term),
   Download: async (body, chunkSize = 10000) =>
-    await sendRequest("Download", { entry: body, chunkSize }),
+    await sendRequest("Download", { entry: body, chunckSize: chunkSize }),
   Split: async (body) => await sendRequest("Split", body),
   File: async (id, seq, size = "100") =>
     await sendRequest("File?id=" + id + "&seq=" + seq + "&size=" + size),
