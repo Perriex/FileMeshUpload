@@ -13,7 +13,11 @@ const Container = () => {
   const [chunkSize, setChunkSize] = React.useState(10000);
 
   useEffect(() => {
-    FileMesh.Root().then(setRoot);
+    FileMesh.Root()
+      .then(setRoot)
+      .catch(() =>
+        setRoot({ ipAddress: "Network out of range!", parent: "none" })
+      );
     FileMesh.List().then(setList);
   }, []);
 
